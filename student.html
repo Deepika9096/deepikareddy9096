@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="student.css">
+</head>
+
+<body>
+    <h1>Student Enrollment List</h1>
+    <table>
+        <tr>
+            <td>
+                <form onsubmit="event.preventDefault();onFormSubmit();" autocomplete="off">
+                    <div>
+                        <label>Full Name*</label><label class="validation-error hide" id="fullNameValidationError">This field is required.</label>
+                        <input type="text" name="fullName" id="fullName">
+                    </div>
+                    <div>
+                        <label>Email</label>
+                        <input type="text" name="email" id="email">
+                    </div>
+                    <div>
+                        <label>College Name</label>
+                        <input type="text" name="collegename" id="collegename">
+                    </div>
+                    <div>
+                        <label>Contact</label>
+                        <input type="text" name="contact" id="contact">
+                    </div>
+
+                    <div class="form-action-buttons">
+                        <input type="submit" value="Submit">
+                    </div>
+                </form>
+            </td>
+            <td>
+                <table class="list" id="student">
+                    <thead>
+                        <tr>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>College Name</th>
+                            <th>Contact</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <script src="student.js"></script>
+</body>
+
+</html>
