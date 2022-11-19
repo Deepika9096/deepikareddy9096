@@ -1,86 +1,43 @@
-var selectedRow = null
-
-function onFormSubmit() {
-    if (validate()) {
-        var formData = readFormData();
-        if (selectedRow == null)
-            insertNewRecord(formData);
-        else
-            updateRecord(formData);
-        resetForm();
-    }
+const form = document.querySelector('form');
+const uname = document.getElementById('name');
+const website = document.getElementById('website');
+const email = document.getElementById('email');
+const cards = document.querySelector('.cards');
+const enrollBtn = document.querySelector('.enroll-btn');
+const image = document.getElementById('image');
+const male = document.getElementById('male');
+const female = document.getElementById('female');
+const ReactJs  = document.getElementById('skill1');
+const Html = document.getElementById('skill2');
+const CSS = document.getElementById('skill3');
+const Javascript = document.getElementById('skill4');
+var img;
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    let values = [];
+    checkboxes.forEach((ele) => {
+        values.push(ele.value);
+    });
+    if(!uname.value || !email.value || !website.value)
+    alert("Enter all the fields to enroll");
+else {
+    cards.innerHTML += `
+        <div class="card">
+            <div class="card-body">
+                <h5>Name:${uname.value}</h5>
+                <p class="gender">Gender:${male.checked ? male.value : female.checked ? female.value : 'other'}</p>
+                <p class="email">Email:${email.value}</p>
+                <p class="skills">Skills:${values}</p>
+            </div>
+            <div class="image">
+                <img src=${img} alt="image"/>
+            </div>
+        </div>
+    `;
 }
-
-function readFormData() {
-    var formData = {};
-    formData["fullName"] = document.getElementById("fullName").value;
-    formData["email"] = document.getElementById("email").value;
-    formData["collegename"] = document.getElementById("collegename").value;
-    formData["contact"] = document.getElementById("contact").value;
-    formData["gender"]=document.getElementById("gender").value;
-
-
-    return formData;
-}
-
-function insertNewRecord(data) {
-    var table = document.getElementById("student").getElementsByTagName('tbody')[0];
-    var newRow = table.insertRow(table.length);
-    cell1 = newRow.insertCell(0);
-    cell1.innerHTML = data.fullName;
-    cell2 = newRow.insertCell(1);
-    cell2.innerHTML = data.email;
-    cell3 = newRow.insertCell(2);
-    cell3.innerHTML = data.collegename;
-    cell4 = newRow.insertCell(3);
-    cell4.innerHTML = data.contact;
-    cell5 = newRow.insertCell(4);
-    cell5.innerHTML = data.gender;
-
-
-    cell5 = newRow.insertCell(5);
-    cell5.innerHTML = `<a onClick="onDelete(this)">Delete</a>`;
-}
-
-function resetForm() {
-    document.getElementById("fullName").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("collegename").value = "";
-    document.getElementById("contact").value = "";
-    document.getElementById("gender").value = "";
-
-
-
-}
-
-function updateRecord(formData) {
-    selectedRow.cells[0].innerHTML = formData.fullName;
-    selectedRow.cells[1].innerHTML = formData.email;
-    selectedRow.cells[2].innerHTML = formData.collegename;
-    selectedRow.cells[3].innerHTML = formData.contact;
-    selectedRow.cells[4].innerHTML = fromData.gender;
-
-
-
-}
-
-function onDelete(td) {
-    if (confirm('Are you sure to delete this record ?')) {
-        row = td.parentElement.parentElement;
-        document.getElementById("student").deleteRow(row.rowIndex);
-        resetForm();
-    }
-}
-
-function validate() {
-    isValid = true;
-    if (document.getElementById("fullName").value == "") {
-        isValid = false;
-        document.getElementById("fullNameValidationError").classList.remove("hide");
-    } else {
-        isValid = true;
-        if (!document.getElementById("fullNameValidationError").classList.contains("hide"))
-            document.getElementById("fullNameValidationError").classList.add("hide");
-    }
-    return isValid;
-}
+form.reset();
+});
+image.addEventListener('change',(e) => {
+img = URL.createObjectURL(event.target.files[0]);
+})
